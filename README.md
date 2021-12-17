@@ -31,12 +31,14 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 
 You can build your container with
 ```bash
-docker build . -t next/blog
+docker build . -t next/blog:1.0.0
 ``` 
 and run it with
 ```bash
-docker run 
+docker run \
     --name next-blog \
-    -p 3000:3000 \
-    -d next/blog
+    --privileged=true \
+    --net service \
+    --ip 172.19.0.105 \
+    -d next/blog:1.0.0
 ```

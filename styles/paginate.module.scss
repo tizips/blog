@@ -1,0 +1,27 @@
+@import "styles/config";
+
+.paginate {
+  @apply flex justify-center pt-10 space-x-2;
+
+  div {
+    @apply w-10 h-10 text-center align-middle;
+
+    a {
+      @apply block w-full h-full text-center rounded-full leading-10 text-gray-400 cursor-pointer bg-gray-100 text-gray-300;
+
+      &:hover {
+        @apply text-white;
+
+        background: $primaryColor;
+      }
+
+      &.disable {
+        @apply cursor-not-allowed bg-gray-100 text-gray-300;
+      }
+    }
+
+    span {
+      @apply inline-block text-center leading-10 text-gray-300 font-light;
+    }
+  }
+}

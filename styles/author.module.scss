@@ -1,0 +1,11 @@
+.author {
+  @apply border-t border-b border-gray-100 px-5 py-2 mt-5;
+
+  img {
+    @apply w-8 h-8 inline-block border border-gray-200 rounded-full mr-3;
+  }
+
+  span {
+    @apply text-xs font-normal text-gray-500;
+  }
+}

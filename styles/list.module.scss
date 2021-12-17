@@ -1,0 +1,28 @@
+@import "styles/config";
+
+.list {
+  @apply p-5;
+  border-bottom: 1px solid #F4F4F5;
+
+  h3 {
+    @apply text-xl mt-5;
+
+    a {
+      &:hover {
+        color: $primaryColor;
+      }
+    }
+  }
+
+  .other {
+    @apply flex flex-row gap-x-4;
+
+    > div {
+      @apply text-xs my-2 text-gray-400;
+    }
+  }
+
+  .summary {
+    @apply text-sm text-gray-500 mt-3 tracking-wider leading-8 mb-5 overflow-ellipsis h-24 overflow-hidden;
+  }
+}

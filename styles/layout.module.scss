@@ -1,0 +1,7 @@
+.layout {
+  @apply max-w-screen-md container mx-auto w-11/12 m-5 md:my-16 bg-white rounded-md shadow-md;
+
+  .container {
+    @apply py-6;
+  }
+}

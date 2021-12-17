@@ -1,0 +1,88 @@
+@import "config";
+
+.nav {
+  @apply flex pb-6;
+
+  .logo {
+    @apply flex-none w-32 relative mb-3;
+
+    a {
+      @apply w-full text-5xl absolute bottom-0 text-center;
+
+      &:hover {
+        color: $primaryColor;
+      }
+    }
+  }
+
+  .navigator {
+    @apply flex-grow relative;
+
+    .pc {
+      @apply hidden md:block right-0 bottom-0 absolute;
+
+      ul {
+        li {
+          @apply inline-block relative;
+
+          a {
+            @apply block px-6 pt-5 pb-3 text-sm;
+
+            &:hover, .active {
+              color: $primaryColor;
+            }
+          }
+
+          ul {
+            @apply hidden absolute right-0 bg-white rounded shadow divide-y divide-gray-200 divide-solid;
+
+            li {
+              @apply w-full;
+
+              a {
+                @apply block w-full text-right py-3 text-sm;
+                white-space: nowrap;
+
+                &:hover {
+                  color: $primaryColor;
+                }
+              }
+            }
+          }
+
+          &:hover {
+            ul {
+              @apply block;
+            }
+          }
+        }
+      }
+    }
+
+    .mobile {
+      @apply block md:hidden;
+    }
+  }
+
+  .search {
+    @apply filter-none w-14 h-20 relative mb-3;
+
+    .click {
+      @apply cursor-pointer absolute bottom-0 mx-auto w-8 h-8 right-5;
+
+      &:before {
+        @apply block bg-white w-6 h-6 border border-gray-300 rounded-full absolute bottom-0;
+
+        content: '';
+        z-index: 1;
+      }
+
+      &:after {
+        @apply inline-block bg-gray-300 w-px h-3 absolute right-3 bottom-0 -rotate-45;
+
+        content: '';
+        transform: rotate(-55deg);
+      }
+    }
+  }
+}

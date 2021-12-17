@@ -1,0 +1,30 @@
+@import "styles/config";
+
+.link {
+  @apply p-5 text-center;
+  border-bottom: 1px solid #F4F4F5;
+
+  ul {
+    @apply mb-2 inline-block;
+
+    li {
+      @apply inline text-xs px-1;
+
+      a {
+        @apply inline-block text-xs px-1 text-gray-400;
+
+        &:hover {
+          color: $primaryColor;
+        }
+      }
+    }
+  }
+
+  p {
+    @apply text-center text-gray-300 text-xs;
+
+    &:hover {
+      color: $primaryColor;
+    }
+  }
+}

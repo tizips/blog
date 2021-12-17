@@ -1,0 +1,19 @@
+@import "styles/config";
+
+.footer {
+  @apply p-5;
+
+  ul {
+    @apply text-xs text-gray-500 text-center;
+
+    li {
+      @apply inline mx-3 leading-6;
+
+      a {
+        &:hover {
+          color: $primaryColor;
+        }
+      }
+    }
+  }
+}

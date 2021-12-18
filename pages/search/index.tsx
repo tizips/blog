@@ -1,4 +1,5 @@
 import { GetServerSideProps } from 'next';
+import { Props } from 'service/props';
 import dynamic from 'next/dynamic';
 import Layout from '@/components/layout';
 import { doSearch } from 'service/api';
@@ -7,17 +8,14 @@ const Articles = dynamic(() => import('@/components/articles'));
 
 const Search = (props: Props.Searcher) => {
   return (
-    <Layout title='搜索结果'>
-      <Articles items={props.articles?.data}
-                paginate={{
-                  size: props.articles?.size,
-                  page: props.articles?.page,
-                  total: props.articles?.total,
-                }} />
-    </Layout>
+    <Articles items={props.articles?.data}
+              paginate={{
+                size: props.articles?.size,
+                page: props.articles?.page,
+                total: props.articles?.total,
+              }} />
   );
 };
-
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
 
@@ -36,6 +34,12 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       articles,
     },
   };
+};
+
+Search.getLayout = (page: any) => {
+  return (
+    <Layout title='搜索结果'>{page}</Layout>
+  );
 };
 
 export default Search;

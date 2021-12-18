@@ -1,4 +1,5 @@
 import { GetServerSideProps } from 'next';
+import { Props } from 'service/props';
 import dynamic from 'next/dynamic';
 import Layout from '@/components/layout';
 import { doArticle } from 'service/api';
@@ -8,12 +9,12 @@ const Author = dynamic(() => import('@/components/author'));
 
 const Article = (props: Props.Article) => {
   return (
-    <Layout title={props.article?.name} banner={props.article?.picture}>
+    <>
       <Information category={props.article?.category} title={props.article?.name} content={props.article?.content}
                    source_name={props.article?.source_name} source_url={props.article?.source_uri}
                    datetime={props.article?.created_at} />
       <Author name={props.article?.author_name} avatar={props.article?.author_avatar} />
-    </Layout>
+    </>
   );
 };
 
@@ -36,5 +37,11 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   };
 };
 
+Article.getLayout = (page: any) => {
+  const props: Props.Article = page.props;
+  return (
+    <Layout title={props.article?.name} banner={props.article?.picture}>{page}</Layout>
+  );
+};
 
 export default Article;

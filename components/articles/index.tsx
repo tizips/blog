@@ -1,3 +1,4 @@
+import { Props } from 'service/props';
 import dynamic from 'next/dynamic';
 
 const List = dynamic(() => import('@/components/list'));

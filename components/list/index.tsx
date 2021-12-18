@@ -1,6 +1,8 @@
+import { Props } from 'service/props';
 import Link from 'next/link';
-import styles from 'styles/list.module.scss';
 import dayjs from 'dayjs';
+
+import styles from 'styles/list.module.scss';
 
 export default function List(props: Props.List) {
 

@@ -1,47 +1,35 @@
-import useSWR from 'swr';
-import { $axios } from './axios';
 import Constants from 'utils/constants';
+import { Props } from './props';
+import { $axios } from './axios';
 
-export const doSite = () => {
-
-  const fetcher = (url: string) => $axios().get(url).then(res => res.data);
-  const { data, error } = useSWR('/system/site', fetcher);
-
-  const response: API.Swr<API.Site> = {
-    data: data && data.code == Constants.Success ? data.data : undefined,
-    error,
-    loading: !data && !error,
-  };
-
-  return response;
+export const doSite = async () => {
+  let data: API.Site | undefined = undefined;
+  const res = await $axios().get('/system/site');
+  if (res.data) {
+    const response: API.Response<API.Site> = res.data;
+    if (response.code == Constants.Success) data = response.data;
+  }
+  return data;
 };
 
-export const doLinker = () => {
-
-  const fetcher = (url: string) => $axios().get(url).then(res => res.data);
-  const { data, error } = useSWR('/links', fetcher);
-
-  const response: API.Swr<API.Linkers[]> = {
-    data: data && data.code == Constants.Success ? data.data : undefined,
-    error,
-    loading: !data && !error,
-  };
-
-  return response;
+export const doLinker = async () => {
+  let data: API.Linkers[] | undefined = undefined;
+  const res = await $axios().get('/links');
+  if (res.data) {
+    const response: API.Response<API.Linkers[]> = res.data;
+    if (response.code == Constants.Success) data = response.data;
+  }
+  return data;
 };
 
-export const doCategories = () => {
-
-  const fetcher = (url: string) => $axios().get(url).then(res => res.data);
-  const { data, error } = useSWR('/categories', fetcher);
-
-  const response: API.Swr<API.Categories[]> = {
-    data: data && data.code == Constants.Success ? data.data : undefined,
-    error,
-    loading: !data && !error,
-  };
-
-  return response;
+export const doCategories = async () => {
+  let data: API.Categories[] | undefined = undefined;
+  const res = await $axios().get('/categories');
+  if (res.data) {
+    const response: API.Response<API.Categories[]> = res.data;
+    if (response.code == Constants.Success) data = response.data;
+  }
+  return data;
 };
 
 export const doCategory = async (uri: string) => {

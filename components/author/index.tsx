@@ -1,3 +1,5 @@
+import { Props } from 'service/props';
+
 import styles from 'styles/author.module.scss';
 
 export default function Author(props: Props.Author) {

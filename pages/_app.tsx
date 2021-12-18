@@ -1,11 +1,11 @@
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
-import { AppProps } from 'next/app';
+import { Props } from 'service/props';
 import NProgress from 'nprogress';
 
 import 'styles/globals.scss';
 
-function MyApp({ Component, pageProps }: AppProps) {
+function Application({ Component, pageProps }: Props.AppPropsWithLayout) {
 
   const router = useRouter();
 
@@ -30,7 +30,9 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   }, [router]);
 
-  return <Component {...pageProps} />;
+  const getLayout = Component.getLayout || ((page) => page);
+
+  return getLayout(<Component {...pageProps} />);
 }
 
-export default MyApp;
+export default Application;

@@ -1,3 +1,4 @@
+import { Props } from 'service/props';
 import { useRouter } from 'next/router';
 
 import styles from 'styles/paginate.module.scss';

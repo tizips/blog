@@ -1,3 +1,4 @@
+import { Props } from 'service/props';
 import dayjs from 'dayjs';
 
 import styles from 'styles/information.module.scss';

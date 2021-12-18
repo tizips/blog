@@ -1,4 +1,6 @@
+import { Props } from 'service/props';
 import Link from 'next/link';
+
 import styles from 'styles/nav.module.scss';
 
 function Nav(props: Props.Nav) {

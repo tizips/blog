@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { Props } from 'service/props';
+import { useEffect, useState } from 'react';
 import Head from 'next/head';
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
@@ -16,7 +17,11 @@ import styles from 'styles/layout.module.scss';
 function Layout(props: Props.Layout) {
 
   const router = useRouter();
+
   const [search, setSearch] = useState<boolean | undefined>();
+  const [site, setSite] = useState<API.Site | undefined>();
+  const [linker, setLinker] = useState<API.Linkers[] | undefined>();
+  const [categories, setCategories] = useState<API.Categories[] | undefined>();
 
   const onSearchOpen = () => {
     document.body.style.overflow = 'hidden';
@@ -33,29 +38,42 @@ function Layout(props: Props.Layout) {
     await router.push(`/search?keyword=${keyword}`);
   };
 
-  // @todo 将数据存储于 Redux 中，避免重复加载
-  const site = doSite();
-  const linker = doLinker();
-  const categories = doCategories();
+  const toSite = () => {
+    doSite().then((response => setSite(response)));
+  };
+
+  const toLinker = () => {
+    doLinker().then((response => setLinker(response)));
+  };
+
+  const toCategories = () => {
+    doCategories().then((response => setCategories(response)));
+  };
+
+  useEffect(() => {
+    if (!site) toSite();
+    if (!linker || linker.length < 0) toLinker();
+    if (!categories || categories.length < 0) toCategories();
+  }, []);
 
   return (
     <>
       <Head>
-        <title>{props.title}{props.title && site.data?.name ? ' - ' : ''}{site.data?.name}</title>
+        <title>{props.title}{props.title && site?.name ? ' - ' : ''}{site?.name}</title>
       </Head>
       <div className={styles.layout}>
-        <Nav name={site.data?.name} items={categories.data} onOpen={onSearchOpen} />
+        <Nav name={site?.name} items={categories} onOpen={onSearchOpen} />
         <Banner uri={props.banner} />
         <div className={styles.container}>
           {props.children}
         </div>
         {
-          linker.data ?
-            <Linker items={linker.data} /> : <></>
+          linker ?
+            <Linker items={linker} /> : <></>
         }
         {
-          site.data && site.data.icp && site.data.copyright && site.data.police ?
-            <Footer icp={site.data.icp} copyright={site.data.copyright} police={site.data.police} /> : <></>
+          site?.icp && site?.copyright && site?.police ?
+            <Footer icp={site.icp} copyright={site.copyright} police={site.police} /> : <></>
         }
       </div>
       {

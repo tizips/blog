@@ -1,3 +1,5 @@
+import { Props } from 'service/props';
+
 import styles from 'styles/footer.module.scss';
 
 export default function Footer(props: Props.Footer) {

@@ -1,3 +1,5 @@
+import { Props } from 'service/props';
+
 import styles from 'styles/banner.module.scss';
 
 export default function Banner(props: Props.Banner) {

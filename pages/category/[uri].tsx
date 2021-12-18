@@ -1,4 +1,5 @@
 import { GetServerSideProps } from 'next';
+import { Props } from 'service/props';
 import dynamic from 'next/dynamic';
 import Layout from '@/components/layout';
 import { doArticles, doCategory } from 'service/api';
@@ -8,18 +9,14 @@ const Information = dynamic(() => import('@/components/information'));
 
 const Category = (props: Props.Category) => {
   return (
-    <Layout title={props.category?.name} banner={props.category?.picture}>
-      {
-        props.category?.is_page ?
-          <Information title={props.category.name} content={props.category.page} is_meta={false} /> :
-          <Articles items={props.articles?.data}
-                    paginate={{
-                      size: props.articles?.size,
-                      page: props.articles?.page,
-                      total: props.articles?.total,
-                    }} />
-      }
-    </Layout>
+    props.category?.is_page ?
+      <Information title={props.category.name} content={props.category.page} is_meta={false} /> :
+      <Articles items={props.articles?.data}
+                paginate={{
+                  size: props.articles?.size,
+                  page: props.articles?.page,
+                  total: props.articles?.total,
+                }} />
   );
 };
 
@@ -45,6 +42,13 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       articles,
     },
   };
+};
+
+Category.getLayout = (page: any) => {
+  const props: Props.Category = page.props;
+  return (
+    <Layout title={props.category?.name} banner={props.category?.picture}>{page}</Layout>
+  );
 };
 
 export default Category;

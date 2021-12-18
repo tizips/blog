@@ -1,3 +1,5 @@
+import { Props } from 'service/props';
+
 import styles from 'styles/search.module.scss';
 
 export default function Search(props: Props.Search) {

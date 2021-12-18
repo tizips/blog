@@ -1,3 +1,5 @@
+import { Props } from 'service/props';
+
 import styles from 'styles/linker.module.scss';
 
 export default function Linker(props: Props.Linker) {

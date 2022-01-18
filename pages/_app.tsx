@@ -34,7 +34,7 @@ function Application({ Component, pageProps }: Props.AppPropsWithLayout) {
 
   const getLayout = Component.getLayout || ((page) => page);
 
-  return getLayout((
+  return getLayout(
     <>
       {
         process?.env?.NEXT_PUBLIC_ANALYTICS ?
@@ -43,8 +43,8 @@ function Application({ Component, pageProps }: Props.AppPropsWithLayout) {
           </Head> : <></>
       }
       <Component {...pageProps} />
-    </>
-  ));
+    </>,
+  );
 }
 
 export default Application;
